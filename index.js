@@ -53,21 +53,26 @@ function upsertItem(bucket, item) {
   return bucket.upsertObject(key, data);
 }
 
-async function sync(bucketName, data) {
-  winston.log("info", "starting sync", {bucket: bucketName});
+async function sync(bucketName, data, logger) {
+  let info = function(){};
+  if (logger) {
+    info = logger.info;
+  }
+
+  info("(s3-podcast) starting sync", {bucket: bucketName});
   let bucket = new S3Bucket(bucketName, "public-read");
   const bucketExists = !!(await bucket.head());
-  winston.log("info", "bucket exists", {exists: bucketExists});
+  info("(s3-podcast) bucket exists", {exists: bucketExists});
   if (!bucketExists) {
-    winston.log("info", "creating bucket");
+    info("(s3-podcast) creating bucket");
     await bucket.create();
-    winston.log("info", "bucket created");
+    info("(s3-podcast) bucket created");
   }
   let podcastItems = [];
   for (let item of data.items) {
-    winston.log("info", "processing item", {title: item.title});
+    info("(s3-podcast) processing item", {title: item.title});
     await upsertItem(bucket, item);
-    winston.log("info", "item uploaded to s3", {title: item.title});
+    info("(s3-podcast) item uploaded to s3", {title: item.title});
     const podcastItem = await getPodcastItem(bucket, item);
     podcastItems.push(podcastItem);
   }
@@ -77,9 +82,9 @@ async function sync(bucketName, data) {
     items: podcastItems
   };
   const serializedFeedData = builder(feedData);
-  winston.log("info", "generated feed");
+  info("(s3-podcast) generated feed");
   await bucket.upsertObject("feed.rss", serializedFeedData);
-  winston.log("info", "sync completed");
+  info("(s3-podcast) sync completed");
 }
 
 module.exports = sync;
