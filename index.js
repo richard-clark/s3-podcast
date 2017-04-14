@@ -79,6 +79,9 @@ async function sync(bucketName, data, logger) {
   const feedData = {
     title: data.title,
     description: data.description,
+    link: `https://s3.amazonaws.com/${bucket.name}/feed.rss`,
+    pubDate: data.pubDate,
+    lastBuildDate: data.lastBuildDate,
     items: podcastItems
   };
   const serializedFeedData = builder(feedData);

@@ -68,12 +68,12 @@ class S3Bucket {
         Metadata: {
           md5chksum: hash
         }
-      }, cb)
+      }, cb);
     });
   }
   upsertObject(key, body) {
     const hash = getObjectHash(body);
-    this.headObject(key).then((response) => {
+    return this.headObject(key).then((response) => {
       if (response && response.Metadata.md5chksum === hash) {
         return;
       }

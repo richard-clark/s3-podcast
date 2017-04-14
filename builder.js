@@ -1,27 +1,5 @@
 const X2JS = require("x2js");
 
-/*
-const data = {
-  title: "Example blog podcast",
-  link: "http://www.example.com/blog",
-  description: "An example website",
-  language: "en",
-  copyright: "None",
-  lastBuildDate: "Thu, 21 Dec 2000 16:01:07 +0200",
-  webMaster: "example@example.com",
-  items: [{
-    title: "Example news",
-    description: "This episode features an example sound file.",
-    pubDate: "Thu, 21 Dec 2000 16:01:07 +0200",
-    enclosure: {
-      url: "http://www.example.com/podcast1.mp3",
-      length: "18001",
-      type: "audio/mpeg"
-    }
-  }]
-}
-*/
-
 // https://gist.github.com/samhernandez/5260558
 function rssDateString(date) {
 
@@ -45,14 +23,14 @@ function rssDateString(date) {
 }
 
 function generateFeed(userData) {
+  const now = new Date();
   const BASE_DATA = {
     title: "Example blog podcast",
-    // link: "http://www.example.com/blog",
     description: "An example website",
     language: "en",
     copyright: "None",
-    lastBuildDate: new Date(),
-    // webMaster: "example@example.com",
+    pubDate: now,
+    lastBuildDate: now,
     items: []
   };
   const data = Object.assign(BASE_DATA, userData);
@@ -66,6 +44,7 @@ function generateFeed(userData) {
       title: item.title,
       description: item.description,
       pubDate: rssDateString(item.pubDate),
+      guid: item.enclosure.url,
       enclosure: {
         _url: item.enclosure.url,
         _length: item.enclosure.length,
@@ -77,7 +56,7 @@ function generateFeed(userData) {
   const jsData = {
     "rss": {
       "_version": "2.0",
-      "_xmlns:dc": "http://purl.org/dc/elements/1.1/",
+      "_xmlns:itunes": "http://www.itunes.com/dtds/podcast-1.0.dtd",
       "channel": [{
         "title": data.title,
         "link": data.link,
@@ -85,6 +64,7 @@ function generateFeed(userData) {
         "language": data.language,
         "copyright": data.copyright,
         "lastBuildDate": rssDateString(data.lastBuildDate),
+        "pubDate": rssDateString(data.pubDate),
         "webMaster": data.webMaster,
         "item": items
       }]
