@@ -27,14 +27,14 @@ const bucketName = "podcast-test";
 s3Podcast(bucketName, data);
 ```
 
-The URL of the podcast will be <https://s3.amazonaws.com/podcast-test/feed.rss> (since the bucket name in this case is `podcast-test`).
+In this example, the URL of the podcast will be <https://s3.amazonaws.com/podcast-test/feed.rss> (since the bucket name in this case is `podcast-test`).
 
 ## Installation and Setup
 
 You can install the package using `npm`:
 
 ```
-npm install
+npm install s3-podcast
 ```
 
 This package wraps the [AWS SDK for Node.js](https://aws.amazon.com/sdk-for-node-js/). Before using this package, you'll need to provide the SDK with a valid set of credentials. This is typically done by creating a file at `~/.aws/credentials` (on Mac/Linux) with a format like this:
@@ -69,7 +69,7 @@ Each _item_ has the following schema:
 
 - `title`
 - `description`
-- `localPath`: the path to the audio file, relative to the current directory.
+- `localPath`: the path to the audio file, relative to the current directory
 - `pubDate` (a `Date` instance)
 
 #### `[logger]`
@@ -80,7 +80,7 @@ The optional `logger` argument, if specified, should be an instance of a [winsto
 
 To develop against this repository, run `npm install` from the repository root to install development dependencies.
 
-Tests cover generating a podcast and staging that podcast to an S3 bucket, so you'll need to follow the [Setup](#setup) instructions first.
+Tests cover generating a podcast and staging that podcast to an S3 bucket, so you'll need to follow the [Installation and Setup](#installation-and-setup) instructions first.
 
 To run tests:
 
