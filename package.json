@@ -1,6 +1,6 @@
 {
   "name": "s3-podcast",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -17,5 +17,9 @@
     "axios": "^0.16.1",
     "mocha": "^3.2.0",
     "x2js": "^3.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/richard-clark/s3-podcast.git"
   }
 }
