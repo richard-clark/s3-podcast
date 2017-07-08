@@ -2,12 +2,11 @@ const builder = require("./builder.js"),
   S3Bucket = require("./s3.js"),
   fs = require("fs"),
   ffmpeg = require("fluent-ffmpeg"),
-  winston = require("winston"),
   path = require("path");
 
-function getMetadata(path) {
+function getMetadata(filePath) {
   return new Promise((resolve, reject) => {
-    ffmpeg.ffprobe(path, function(err, metadata) {
+    ffmpeg.ffprobe(filePath, function(err, metadata) {
       if (err) { return reject(err); }
       resolve({
         duration: Math.round(metadata.format.duration),
