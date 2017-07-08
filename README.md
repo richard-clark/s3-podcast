@@ -23,7 +23,32 @@ const data = {
   }]
 };
 
-const bucketName = "rc-podcast-test";
+const bucketName = "podcast-test";
 sync(bucketName, data)
+```
 
+The URL of the podcast will be (since the bucket name in this case is `podcast-test`) <https://s3.amazonaws.com/podcast-test/feed.rss>.
+
+Note that S3 bucket names must be universally unique, so you'll need to choose a different name.
+
+## Installation and Setup
+
+You can install the package using `npm`:
+
+```
+npm install
+```
+
+This package wraps the [AWS SDK for Node.js](https://aws.amazon.com/sdk-for-node-js/). Before using this package, you'll need to provide the SDK with a valid set of credentials. [Amazon's documentation](https://aws.amazon.com/sdk-for-node-js/) provides instructions for doing this.
+
+## Development
+
+To develop against this repository, run `npm install` from the repository root to install development dependencies.
+
+Tests cover generating a podcast and staging that podcast to an S3 bucket, so you'll need to follow the [Setup](#setup) instructions first.
+
+To run tests:
+
+```
+S3_PODCAST_TEST_BUCKET_NAME=some-bucket npm test
 ```

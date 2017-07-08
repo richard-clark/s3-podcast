@@ -8,20 +8,20 @@
     <pubDate>Sat, 31 Dec 2016 19:00:00 -0500</pubDate>
     <lastBuildDate>Sun, 01 Jan 2017 19:00:00 -0500</lastBuildDate>
     <webMaster/>
-    <link>https://s3.amazonaws.com/rc-podcast-test/feed.rss</link>
+    <link>https://s3.amazonaws.com/::bucketName::/feed.rss</link>
     <item>
       <title>Alice in Wonderland</title>
       <description>Lewis Carroll</description>
-      <guid>https://s3.amazonaws.com/rc-podcast-test/alice-in-wonderland.mp3</guid>
+      <guid>https://s3.amazonaws.com/::bucketName::/alice-in-wonderland.mp3</guid>
       <pubDate>Fri, 10 Nov 2006 19:00:00 -0500</pubDate>
-      <enclosure url="https://s3.amazonaws.com/rc-podcast-test/alice-in-wonderland.mp3" length="34" type="audio/mpeg"/>
+      <enclosure url="https://s3.amazonaws.com/::bucketName::/alice-in-wonderland.mp3" length="34" type="audio/mpeg"/>
     </item>
     <item>
       <title>A Tale of Two Cities</title>
       <description>Charles Dickens</description>
-      <guid>https://s3.amazonaws.com/rc-podcast-test/a-tale-of-two-cities.mp3</guid>
+      <guid>https://s3.amazonaws.com/::bucketName::/a-tale-of-two-cities.mp3</guid>
       <pubDate>Sat, 29 Mar 2014 20:00:00 -0400</pubDate>
-      <enclosure url="https://s3.amazonaws.com/rc-podcast-test/a-tale-of-two-cities.mp3" length="37" type="audio/mpeg"/>
+      <enclosure url="https://s3.amazonaws.com/::bucketName::/a-tale-of-two-cities.mp3" length="37" type="audio/mpeg"/>
     </item>
   </channel>
 </rss>

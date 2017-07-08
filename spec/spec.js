@@ -6,7 +6,12 @@ const sync = require("../index.js"),
   winston = require("winston");
 
 async function test() {
-  const BUCKET_NAME = "rc-podcast-test";
+  const bucketName = process.env.S3_PODCAST_TEST_BUCKET_NAME;
+  if (!bucketName) {
+    throw new Error("No test bucket specified. Ensure the " +
+      "S3_PODCAST_TEST_BUCKET_NAME environment variable is set.");
+  }
+  console.log(bucketName);
   const data = {
     title: "Literature Podcast",
     description: "The first paragraph from popular books.",
@@ -24,21 +29,23 @@ async function test() {
       pubDate: new Date("2014-03-30T00:00:00Z")
     }]
   };
-  await sync(BUCKET_NAME, data, winston);
-  const response = await axios.get(`https://s3.amazonaws.com/${BUCKET_NAME}/feed.rss`);
+  await sync(bucketName, data, winston);
+  const response = await axios.get(`https://s3.amazonaws.com/${bucketName}/feed.rss`);
   const actualString = response.data;
 
   const x2js = new X2JS();
   const actual = x2js.xml2js(actualString);
 
-  const expectedString = fs.readFileSync("./expected.xml", "utf8");
+  const expectedString = fs.readFileSync("./expected.xml", "utf8")
+    .replace(/::bucketName::/g, bucketName);
   const expected = x2js.xml2js(expectedString);
 
   assert.deepEqual(actual, expected, "feed in bucket matches expected");
 }
 
 describe("s3-podcast", function() {
-  it("works as expected end-to-end", function(done) {
-    test().then(() => done()).catch(done);
+  it("works as expected end-to-end", function() {
+    this.timeout(10*1000); // 10s; the default of 2s isn't always enough
+    return test();
   });
 });
