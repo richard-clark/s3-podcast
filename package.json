@@ -11,12 +11,12 @@
   "dependencies": {
     "aws-sdk": "^2.41.0",
     "fluent-ffmpeg": "^2.1.0",
-    "winston": "^2.3.1"
+    "winston": "^2.3.1",
+    "x2js": "^3.1.1"
   },
   "devDependencies": {
     "axios": "^0.16.1",
-    "mocha": "^3.2.0",
-    "x2js": "^3.1.1"
+    "mocha": "^3.2.0"
   },
   "repository": {
     "type": "git",
